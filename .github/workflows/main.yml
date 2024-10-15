@@ -15,12 +15,12 @@ jobs:
       - name: ssh to ec2
         uses: appleboy/ssh-action@v0.1.6
         with:
+          debug: true
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.HOST }} 
+          username: ${{ secrets.USER }} 
           script: |
             set -e
-            echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem
-            chmod 600 private_key.pem
-            ssh -i private_key.pem -o StrictHostKeyChecking=no ubuntu@${{ secrets.HOST }} "echo 'Connected successfully'" -v
-
             PID=$(lsof -t -i:8080)
             if [ -z "$PID" ]; then
               echo "No process is running on port 8080"
