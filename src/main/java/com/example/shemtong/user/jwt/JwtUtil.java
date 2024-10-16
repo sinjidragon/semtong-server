@@ -1,4 +1,4 @@
-package com.example.shemtong.jwt;
+package com.example.shemtong.user.jwt;
 
 import org.springframework.stereotype.Component;
 

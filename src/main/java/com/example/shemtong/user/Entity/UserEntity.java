@@ -1,4 +1,4 @@
-package com.example.shemtong.Entity;
+package com.example.shemtong.user.Entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -27,11 +27,7 @@ public class UserEntity {
     @Email
     private String email;
 
-/*
-    @Column(nullable = false)
-    private String user; // 유저 성명 이게 필요하나???
-
-    private String role; // 권한
-*/
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
 }

@@ -1,4 +1,4 @@
-package com.example.shemtong.dto.signup;
+package com.example.shemtong.user.dto.signup;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -13,7 +13,6 @@ public record SignupRequest (
 
         @Email
         String email
-
 ) {
 
 }
