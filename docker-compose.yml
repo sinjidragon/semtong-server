@@ -16,8 +16,11 @@ services:
     restart: on-failure
 
   springboot:
-    image: semtongserver-app:latest
+    image: semtongserver
+    env_file:
+      - .env
     container_name: semtongserver
+    build: .
     ports:
       - "8080:8080"
     environment:
