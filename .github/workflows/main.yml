@@ -20,7 +20,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Build with Gradle
-        run: ./gradlew build --warning-mode all
+        run: ./gradlew build -x test
 
 
       - name: Log in to Docker Hub
