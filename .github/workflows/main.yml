@@ -51,10 +51,13 @@ jobs:
           host: ${{ secrets.HOST }} 
           username: ${{ secrets.USER }} 
           script: |
-            sudo docker stop semtong-container || true
-            sudo docker rm semtong-container || true
+            
 
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/semtongserver:latest
 
-            sudo docker run --name semtong-container --env-file ~/.env -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/semtongserver:latest
+            docker-compose up -d
+
+            # sudo docker stop semtong-container || true
+            # sudo docker rm semtong-container || true
+            # sudo docker run --name semtong-container --env-file ~/.env -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/semtongserver:latest
           
