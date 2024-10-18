@@ -40,5 +40,5 @@ jobs:
 
             docker pull ${{ secrets.DOCKER_USERNAME }}/semtongserver:latest
 
-            docker run -d --name semtongserver -p 8080:8080 --env-file /path/to/.env ${{ secrets.DOCKER_USERNAME }}/semtongserver:latest
+            docker run --name semtong-container --env-file ~/.env -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/semtongserver:latest
           
