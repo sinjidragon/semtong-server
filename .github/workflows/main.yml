@@ -51,6 +51,8 @@ jobs:
           host: ${{ secrets.HOST }} 
           username: ${{ secrets.USER }} 
           script: |
+            sudo su 
+            
             docker stop semtong-container || true
             docker rm semtongserver || true
 
