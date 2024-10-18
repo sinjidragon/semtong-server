@@ -52,7 +52,7 @@ jobs:
           username: ${{ secrets.USER }} 
           script: |
             sudo docker stop semtong-container || true
-            sudo docker rm semtongserver || true
+            sudo docker rm semtong-container || true
 
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/semtongserver:latest
 
