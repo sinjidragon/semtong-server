@@ -1,9 +1,9 @@
-package com.example.shemtong.user.service;
+package com.example.shemtong.domain.auth.service;
 
-import com.example.shemtong.user.dto.EmailRequest;
-import com.example.shemtong.user.dto.ErrorResponse;
-import com.example.shemtong.user.dto.SuccessResponse;
-import com.example.shemtong.user.repository.UserRepository;
+import com.example.shemtong.domain.auth.dto.EmailRequest;
+import com.example.shemtong.global.dto.ErrorResponse;
+import com.example.shemtong.global.dto.SuccessResponse;
+import com.example.shemtong.domain.user.repository.UserRepository;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.data.redis.core.StringRedisTemplate;

@@ -1,6 +1,6 @@
-package com.example.shemtong.user.repository;
+package com.example.shemtong.domain.user.repository;
 
-import com.example.shemtong.user.Entity.UserEntity;
+import com.example.shemtong.domain.user.Entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,14 +1,13 @@
-package com.example.shemtong.user.service;
+package com.example.shemtong.domain.auth.service;
 
-import com.example.shemtong.user.Entity.UserEntity;
-import com.example.shemtong.user.dto.ErrorResponse;
-import com.example.shemtong.user.dto.login.LoginRequest;
-import com.example.shemtong.user.dto.login.LoginResponse;
-import com.example.shemtong.user.dto.signup.SignupRequest;
-import com.example.shemtong.user.dto.SuccessResponse;
-import com.example.shemtong.user.jwt.JwtUtil;
-import com.example.shemtong.user.repository.UserRepository;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import com.example.shemtong.domain.user.Entity.UserEntity;
+import com.example.shemtong.domain.auth.jwt.JwtUtil;
+import com.example.shemtong.global.dto.ErrorResponse;
+import com.example.shemtong.domain.auth.dto.login.LoginRequest;
+import com.example.shemtong.domain.auth.dto.login.LoginResponse;
+import com.example.shemtong.domain.auth.dto.signup.SignupRequest;
+import com.example.shemtong.global.dto.SuccessResponse;
+import com.example.shemtong.domain.user.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,6 +34,13 @@ public class AuthService {
     }
 
     public ResponseEntity<?> joinUser(SignupRequest signupRequest) {
+        if (userRepository.findByUsername(signupRequest.username()).isPresent()) {
+            return ResponseEntity.badRequest().body(new ErrorResponse("signup failed","아이디가 이미 사용중입니다"));
+        }
+
+        if (userRepository.findByEmail(signupRequest.email()).isPresent()) {
+            return ResponseEntity.badRequest().body(new ErrorResponse("signup failed","이미 사용중인 이메일입니다"));
+        }
 
         UserEntity userEntity = UserEntity.builder()
                 .username(signupRequest.username())
@@ -44,7 +50,7 @@ public class AuthService {
 
         userRepository.save(userEntity);
 
-        return ResponseEntity.ok(new SuccessResponse("join successful"));
+        return ResponseEntity.ok(new SuccessResponse("signup successful"));
 
     }
 

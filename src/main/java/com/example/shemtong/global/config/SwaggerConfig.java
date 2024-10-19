@@ -1,4 +1,4 @@
-package com.example.shemtong.config;
+package com.example.shemtong.global.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

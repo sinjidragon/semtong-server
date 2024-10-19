@@ -1,4 +1,4 @@
-package com.example.shemtong.user.Entity;
+package com.example.shemtong.domain.user.Entity;
 
 public enum UserRole {
     MEMBER,

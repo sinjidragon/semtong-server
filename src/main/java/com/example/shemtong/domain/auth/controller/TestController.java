@@ -1,4 +1,4 @@
-package com.example.shemtong.controller;
+package com.example.shemtong.domain.auth.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,6 +1,6 @@
-package com.example.shemtong.config;
+package com.example.shemtong.global.config;
 
-import com.example.shemtong.user.jwt.JwtFilter;
+import com.example.shemtong.domain.auth.jwt.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

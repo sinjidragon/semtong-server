@@ -1,4 +1,4 @@
-package com.example.shemtong.user.dto;
+package com.example.shemtong.domain.auth.dto;
 
 import lombok.Getter;
 

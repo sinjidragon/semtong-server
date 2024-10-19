@@ -1,12 +1,12 @@
-package com.example.shemtong.controller;
+package com.example.shemtong.domain.auth.controller;
 
-import com.example.shemtong.user.dto.EmailRequest;
-import com.example.shemtong.user.dto.ErrorResponse;
-import com.example.shemtong.user.dto.login.LoginRequest;
-import com.example.shemtong.user.dto.signup.SignupRequest;
-import com.example.shemtong.user.jwt.JwtUtil;
-import com.example.shemtong.user.service.AuthService;
-import com.example.shemtong.user.service.MailService;
+import com.example.shemtong.domain.auth.dto.EmailRequest;
+import com.example.shemtong.global.dto.ErrorResponse;
+import com.example.shemtong.domain.auth.dto.login.LoginRequest;
+import com.example.shemtong.domain.auth.dto.signup.SignupRequest;
+import com.example.shemtong.domain.auth.jwt.JwtUtil;
+import com.example.shemtong.domain.auth.service.AuthService;
+import com.example.shemtong.domain.auth.service.MailService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.mail.MessagingException;
 import org.springframework.http.ResponseEntity;

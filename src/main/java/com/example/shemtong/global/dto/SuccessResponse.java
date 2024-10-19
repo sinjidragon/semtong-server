@@ -1,4 +1,4 @@
-package com.example.shemtong.user.dto;
+package com.example.shemtong.global.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

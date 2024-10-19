@@ -1,4 +1,4 @@
-package com.example.shemtong.user.jwt;
+package com.example.shemtong.domain.auth.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
