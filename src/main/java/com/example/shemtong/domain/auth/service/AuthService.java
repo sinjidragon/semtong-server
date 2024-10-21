@@ -1,5 +1,6 @@
 package com.example.shemtong.domain.auth.service;
 
+import com.example.shemtong.domain.auth.dto.RefreshResponse;
 import com.example.shemtong.domain.user.Entity.UserEntity;
 import com.example.shemtong.domain.auth.jwt.JwtUtil;
 import com.example.shemtong.global.dto.ErrorResponse;
@@ -71,7 +72,9 @@ public class AuthService {
         String token = jwtUtil.generateToken(user.getUid().toString());
         String refreshToken = jwtUtil.generateRefreshToken(user.getUid().toString());
 
-        return ResponseEntity.ok(new LoginResponse(token, refreshToken, "bearer"));
+        String userRole = user.getRole() != null ? user.getRole().name() : null;
+
+        return ResponseEntity.ok(new LoginResponse(userRole, token, refreshToken, "bearer"));
     }
 
     public ResponseEntity<?> refreshUser(String token) {
@@ -80,7 +83,7 @@ public class AuthService {
             String accessToken = jwtUtil.generateToken(id.toString());
             String refreshToken = jwtUtil.generateRefreshToken(id.toString());
 
-            return ResponseEntity.ok(new LoginResponse(accessToken, refreshToken, "bearer"));
+            return ResponseEntity.ok(new RefreshResponse(accessToken, refreshToken, "bearer"));
         }else{
             return ResponseEntity.badRequest().body(new ErrorResponse("Token Refresh Failed","Token is not found."));
         }
