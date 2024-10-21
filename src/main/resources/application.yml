@@ -10,12 +10,12 @@ spring:
 
   data:
     redis:
-      host: 52.79.34.144
+      host: ${REDIS_HOST}
       port: 6379
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect

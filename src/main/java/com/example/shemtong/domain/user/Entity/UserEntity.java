@@ -1,5 +1,6 @@
 package com.example.shemtong.domain.user.Entity;
 
+import com.example.shemtong.domain.group.entity.GroupEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
@@ -29,5 +30,9 @@ public class UserEntity {
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private GroupEntity group;
 
 }
