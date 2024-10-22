@@ -26,7 +26,7 @@ public class JwtFilter extends OncePerRequestFilter {
     }
 
     private final List<String> permitAllPaths = Arrays.asList(
-            "/auth/register", "/auth/login", "/auth/refresh","/swagger-ui/**", "/v3/api-docs/**"
+            "/auth/**","/swagger-ui/**", "/v3/api-docs/**"
     );
 
     private boolean isAuthenticatedPath(String path) {

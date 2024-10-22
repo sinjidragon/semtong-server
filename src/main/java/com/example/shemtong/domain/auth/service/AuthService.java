@@ -1,6 +1,6 @@
 package com.example.shemtong.domain.auth.service;
 
-import com.example.shemtong.domain.auth.dto.RefreshResponse;
+import com.example.shemtong.domain.auth.dto.refresh.RefreshResponse;
 import com.example.shemtong.domain.user.Entity.UserEntity;
 import com.example.shemtong.domain.auth.jwt.JwtUtil;
 import com.example.shemtong.global.dto.ErrorResponse;
@@ -9,11 +9,13 @@ import com.example.shemtong.domain.auth.dto.login.LoginResponse;
 import com.example.shemtong.domain.auth.dto.signup.SignupRequest;
 import com.example.shemtong.global.dto.SuccessResponse;
 import com.example.shemtong.domain.user.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class AuthService {
 
@@ -78,14 +80,25 @@ public class AuthService {
     }
 
     public ResponseEntity<?> refreshUser(String token) {
+        log.info("refresh token 2");
         Long id = jwtUtil.extractUserId(token);
+
+        UserEntity user = userRepository.findById(id).orElse(null);
+
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new ErrorResponse("Token Refresh Failed", "유저를 찾을 수 없습니다."));
+        }
+
+        String userRole = user.getRole() != null ? user.getRole().name() : null;
+
         if (jwtUtil.isTokenValid(token)) {
             String accessToken = jwtUtil.generateToken(id.toString());
             String refreshToken = jwtUtil.generateRefreshToken(id.toString());
 
-            return ResponseEntity.ok(new RefreshResponse(accessToken, refreshToken, "bearer"));
+            return ResponseEntity.ok(new RefreshResponse(userRole,accessToken, refreshToken, "bearer"));
         }else{
-            return ResponseEntity.badRequest().body(new ErrorResponse("Token Refresh Failed","Token is not found."));
+            return ResponseEntity.badRequest().body(new ErrorResponse("Token Refresh Failed","토큰을 찾을 수 없습니다."));
         }
     }
 

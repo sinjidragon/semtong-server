@@ -1,4 +1,4 @@
-package com.example.shemtong.domain.auth.dto;
+package com.example.shemtong.domain.auth.dto.refresh;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,6 +8,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Builder
 public class RefreshResponse {
+
+    private String userRole;
 
     private String accessToken;
 
