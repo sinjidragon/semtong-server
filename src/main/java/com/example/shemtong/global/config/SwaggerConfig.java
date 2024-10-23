@@ -14,7 +14,7 @@ public class SwaggerConfig {
     public OpenAPI api() {
         return new OpenAPI()
                 .info(
-                        new Info().title("Shemtong API")
+                        new Info().title("Semtong API")
                                 .version("1.0.1")
                 )
                 .addSecurityItem(new SecurityRequirement().addList("Authorization"))

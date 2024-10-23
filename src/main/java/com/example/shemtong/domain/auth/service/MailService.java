@@ -54,7 +54,7 @@ public class MailService {
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
         helper.setTo(email);
-        helper.setSubject("shemtong 인증 코드");
+        helper.setSubject("semtong 인증 코드");
 
         Context context = new Context();
         context.setVariable("verificationCode", verificationCode);
