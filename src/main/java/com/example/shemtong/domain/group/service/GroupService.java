@@ -2,6 +2,7 @@ package com.example.shemtong.domain.group.service;
 
 import com.example.shemtong.domain.group.dto.request.JoinGroupRequest;
 import com.example.shemtong.domain.group.dto.response.CreateGroupResponse;
+import com.example.shemtong.domain.group.dto.response.JoinGroupResponse;
 import com.example.shemtong.domain.group.entity.GroupEntity;
 import com.example.shemtong.domain.group.repository.GroupRepository;
 import com.example.shemtong.domain.user.Entity.UserEntity;
@@ -75,7 +76,7 @@ public class GroupService {
         user.setGroup(group);
         userRepository.save(user);
 
-        return ResponseEntity.ok(new SuccessResponse("joinGroup successful"));
+        return ResponseEntity.ok(new JoinGroupResponse(group.getGroupname()));
     }
 
 }
