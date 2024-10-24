@@ -1,6 +1,7 @@
 package com.example.shemtong.domain.group.entity;
 
 import com.example.shemtong.domain.user.Entity.UserEntity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class GroupEntity {
     private String groupcode;
 
     @OneToMany(mappedBy = "group")
+    @JsonManagedReference
     private List<UserEntity> users;
 
 }

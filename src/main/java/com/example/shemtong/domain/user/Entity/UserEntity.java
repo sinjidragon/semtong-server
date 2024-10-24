@@ -1,6 +1,7 @@
 package com.example.shemtong.domain.user.Entity;
 
 import com.example.shemtong.domain.group.entity.GroupEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
@@ -33,6 +34,7 @@ public class UserEntity {
 
     @ManyToOne
     @JoinColumn(name = "group_id")
+    @JsonBackReference
     private GroupEntity group;
 
 }

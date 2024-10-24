@@ -1,7 +1,9 @@
 package com.example.shemtong.domain.group.service;
 
 import com.example.shemtong.domain.group.dto.request.JoinGroupRequest;
+import com.example.shemtong.domain.group.dto.request.RemoveMemberRequest;
 import com.example.shemtong.domain.group.dto.response.CreateGroupResponse;
+import com.example.shemtong.domain.group.dto.response.GetGroupResponse;
 import com.example.shemtong.domain.group.dto.response.JoinGroupResponse;
 import com.example.shemtong.domain.group.entity.GroupEntity;
 import com.example.shemtong.domain.group.repository.GroupRepository;
@@ -15,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.List;
 
 
 @Service
@@ -77,6 +80,74 @@ public class GroupService {
         userRepository.save(user);
 
         return ResponseEntity.ok(new JoinGroupResponse(group.getGroupname()));
+    }
+
+    public ResponseEntity<GetGroupResponse> getGroup(Principal principal) {
+        UserEntity user = userRepository.findById(Long.parseLong(principal.getName())).orElseThrow(null);
+
+        GroupEntity group = user.getGroup();
+
+        if (group == null){
+            throw new RuntimeException("그룹에 속해 있지 않습니다.");
+        }
+        return ResponseEntity.ok(new GetGroupResponse(group.getGroupname(), group.getGroupcode(), group.getUsers()));
+    }
+
+    public ResponseEntity<?> removeMember(Principal principal, RemoveMemberRequest removeMemberRequest) {
+        UserEntity agent = userRepository.findById(Long.parseLong(principal.getName())).orElseThrow(null);
+
+        if (agent.getRole() != UserRole.AGENT){
+            return  ResponseEntity.badRequest().body(new ErrorResponse("removeMember failed", "권한이 없습니다."));
+        }
+
+        UserEntity user = userRepository.findById(removeMemberRequest.getUserid()).orElseThrow(null);
+
+        if (user == null){
+            return  ResponseEntity.badRequest().body(new ErrorResponse("removeMember failed", "유저를 찾을 수 없습니다."));
+        }
+
+        if (user.getGroup() == null || !user.getGroup().equals(agent.getGroup())){
+            return  ResponseEntity.badRequest().body(new ErrorResponse("removeMember failed", "유저가 그룹에 속해있지 않습니다."));
+        }
+
+        user.setGroup(null);
+        userRepository.save(user);
+
+        return ResponseEntity.ok(new SuccessResponse("removeMember successful"));
+    }
+
+    public ResponseEntity<?> deleteGroup(Principal principal) {
+        UserEntity agent = userRepository.findById(Long.parseLong(principal.getName())).orElseThrow(null);
+
+        if (agent.getRole() != UserRole.AGENT){
+            return  ResponseEntity.badRequest().body(new ErrorResponse("deleteGroup failed", "권한이 없습니다."));
+        }
+
+        GroupEntity group = agent.getGroup();
+        if (group == null) {
+            return  ResponseEntity.badRequest().body(new ErrorResponse("deleteGroup failed", "그룹을 찾을 수 없습니다."));
+        }
+
+        group.getUsers().forEach(user -> user.setGroup(null));
+        userRepository.saveAll(group.getUsers());
+
+        groupRepository.delete(group);
+
+        return ResponseEntity.ok(new SuccessResponse("deleteGroup successful"));
+    }
+
+    public ResponseEntity<?> leaveGroup(Principal principal) {
+        UserEntity user = userRepository.findById(Long.parseLong(principal.getName())).orElseThrow(null);
+
+        if (user.getGroup() == null) {
+            return  ResponseEntity.badRequest().body(new ErrorResponse("leaveGroup failed", "그룹에 속해있지 않습니다."));
+        }
+
+        user.setGroup(null);
+        user.setRole(null);
+        userRepository.save(user);
+
+        return ResponseEntity.ok(new SuccessResponse("leaveGroup successful"));
     }
 
 }
