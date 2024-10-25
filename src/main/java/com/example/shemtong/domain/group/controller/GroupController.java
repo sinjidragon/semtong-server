@@ -3,13 +3,11 @@ package com.example.shemtong.domain.group.controller;
 import com.example.shemtong.domain.group.dto.request.JoinGroupRequest;
 import com.example.shemtong.domain.group.dto.request.RemoveMemberRequest;
 import com.example.shemtong.domain.group.service.GroupService;
-import com.example.shemtong.domain.user.Entity.UserEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.List;
 
 @RestController
 @RequestMapping("/group")

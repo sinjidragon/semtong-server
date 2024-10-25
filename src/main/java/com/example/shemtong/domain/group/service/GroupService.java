@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.List;
 
 
 @Service
@@ -111,6 +110,7 @@ public class GroupService {
         }
 
         user.setGroup(null);
+        user.setRole(null);
         userRepository.save(user);
 
         return ResponseEntity.ok(new SuccessResponse("removeMember successful"));
@@ -129,6 +129,7 @@ public class GroupService {
         }
 
         group.getUsers().forEach(user -> user.setGroup(null));
+        group.getUsers().forEach(user -> user.setRole(null));
         userRepository.saveAll(group.getUsers());
 
         groupRepository.delete(group);
