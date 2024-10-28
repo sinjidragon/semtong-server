@@ -9,11 +9,13 @@ import com.example.shemtong.domain.auth.jwt.JwtUtil;
 import com.example.shemtong.domain.auth.service.AuthService;
 import com.example.shemtong.domain.auth.service.MailService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.mail.MessagingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "Auth", description = "auth API")
 @Slf4j
 @RestController
 @RequestMapping("/auth")

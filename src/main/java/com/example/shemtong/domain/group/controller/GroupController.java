@@ -4,11 +4,13 @@ import com.example.shemtong.domain.group.dto.request.JoinGroupRequest;
 import com.example.shemtong.domain.group.dto.request.RemoveMemberRequest;
 import com.example.shemtong.domain.group.service.GroupService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
+@Tag(name = "Group", description = "그룹 관리 API")
 @RestController
 @RequestMapping("/group")
 public class GroupController {
