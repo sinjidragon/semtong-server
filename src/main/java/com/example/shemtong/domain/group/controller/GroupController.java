@@ -20,7 +20,7 @@ public class GroupController {
     }
 
     @Operation(summary = "그룹 생성")
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<?> createGroup(Principal principal) {
         return groupService.createGroup(principal);
     }
