@@ -39,6 +39,8 @@ public class UserService {
         UserEntity user = userRepository.findByUid(Long.valueOf(principal.getName())).orElseThrow(null);
         verifyUser(user);
 
+        user.setRole(null);
+        user.setGroup(null);
         user.setState(UserState.DELETED);
         user.setDeletedAt(LocalDateTime.now());
 
