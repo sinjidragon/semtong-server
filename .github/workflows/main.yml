@@ -56,5 +56,5 @@ jobs:
 
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/semtongserver:latest
             
-            sudo docker run -d --name semtong-container --env-file ~/.env -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/semtongserver:latest
+            sudo docker run -d --name semtong-container --env-file ~/.env -p 8080:8080 -e TZ=Asia/Seoul ${{ secrets.DOCKER_USERNAME }}/semtongserver:latest
           

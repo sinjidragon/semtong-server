@@ -7,6 +7,9 @@ import jakarta.validation.constraints.Email;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.security.Timestamp;
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -36,5 +39,10 @@ public class UserEntity {
     @JoinColumn(name = "group_id")
     @JsonBackReference
     private GroupEntity group;
+
+    @Column(nullable = false)
+    private UserState state = UserState.CREATED;
+
+    private LocalDateTime deletedAt;
 
 }
