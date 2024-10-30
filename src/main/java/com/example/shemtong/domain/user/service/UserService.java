@@ -5,11 +5,9 @@ import com.example.shemtong.domain.user.Entity.UserState;
 import com.example.shemtong.domain.user.dto.UserResponse;
 import com.example.shemtong.domain.user.exception.UserErrorCode;
 import com.example.shemtong.domain.user.repository.UserRepository;
-import com.example.shemtong.global.dto.ErrorResponse;
 import com.example.shemtong.global.dto.SuccessResponse;
 import com.example.shemtong.global.exception.CustomException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
