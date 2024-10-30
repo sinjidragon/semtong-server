@@ -25,9 +25,9 @@ import static com.example.shemtong.domain.user.Entity.UserState.CREATED;
 @RequiredArgsConstructor
 public class AuthService {
 
-    private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
-    private JwtUtil jwtUtil;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
     public void verifyUser(UserEntity user) {
         if (user == null)
