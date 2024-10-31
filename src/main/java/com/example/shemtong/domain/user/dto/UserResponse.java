@@ -2,6 +2,7 @@ package com.example.shemtong.domain.user.dto;
 
 import com.example.shemtong.domain.user.Entity.UserEntity;
 import com.example.shemtong.domain.user.Entity.UserRole;
+import com.example.shemtong.domain.user.Entity.UserState;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -12,6 +13,7 @@ public class UserResponse {
     private String username;
     private String email;
     private UserRole role;
+    private UserState userState;
     private Long groupid;
 
     public static UserResponse fromUserEntity(UserEntity userEntity) {
@@ -19,6 +21,7 @@ public class UserResponse {
                 .id(userEntity.getUid())
                 .username(userEntity.getUsername())
                 .email(userEntity.getEmail())
+                .userState(userEntity.getState())
                 .role(userEntity.getRole())
                 .groupid(userEntity.getGroup().getId())
                 .build();

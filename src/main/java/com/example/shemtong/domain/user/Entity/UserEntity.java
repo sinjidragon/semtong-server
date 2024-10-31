@@ -41,6 +41,7 @@ public class UserEntity {
     private GroupEntity group;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private UserState state = UserState.CREATED;
 
     private LocalDateTime deletedAt;
