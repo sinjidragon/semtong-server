@@ -49,7 +49,7 @@ public class GroupService {
         if (agent.getState() == UserState.DELETED)
             throw new CustomException(UserErrorCode.USER_IS_DELETED);
 
-        if (agent.getRole() == UserRole.AGENT)
+        if (agent.getRole() != UserRole.AGENT)
             throw new CustomException(UserErrorCode.USER_UNAUTHORIZED);
     }
 
