@@ -2,7 +2,6 @@ package com.example.shemtong.domain.auth.service;
 
 import com.example.shemtong.domain.auth.dto.EmailRequest;
 import com.example.shemtong.domain.auth.exception.AuthErrorCode;
-import com.example.shemtong.global.dto.ErrorResponse;
 import com.example.shemtong.global.dto.SuccessResponse;
 import com.example.shemtong.domain.user.repository.UserRepository;
 import com.example.shemtong.global.exception.CustomException;
@@ -10,7 +9,6 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -19,7 +17,6 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import org.thymeleaf.context.Context;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
@@ -41,8 +38,7 @@ public class MailService {
 
         String verificationCode = generateVerificationCode();
 
-        ValueOperations<String, String> ops = redisTemplate.opsForValue();
-        ops.set(email, verificationCode, 5, TimeUnit.MINUTES); // 5분 후 만료
+        redisTemplate.opsForHash().put("verificationCodes", email, verificationCode);
 
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -73,14 +69,13 @@ public class MailService {
             throw new CustomException(AuthErrorCode.CODE_NOT_MATCH);
         }
 
-        redisTemplate.delete(emailRequest.getMail());
+        redisTemplate.opsForHash().delete("verificationCodes", emailRequest.getMail());
 
         return ResponseEntity.ok(new SuccessResponse("verify email successful"));
     }
 
     public String getVerificationCode(String email) { //
-        ValueOperations<String, String> ops = redisTemplate.opsForValue();
-        return ops.get(email);
+        return (String) redisTemplate.opsForHash().get("verificationCodes", email);
     }
 
 }
