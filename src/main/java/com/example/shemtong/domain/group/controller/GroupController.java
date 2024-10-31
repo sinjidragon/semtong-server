@@ -44,7 +44,7 @@ public class GroupController {
     }
 
     @Operation(summary = "그룹에서 멤버 추방")
-    @DeleteMapping("/member")
+    @PostMapping("/member")
     public ResponseEntity<SuccessResponse> removeMember(Principal principal, @RequestBody RemoveMemberRequest removeMemberRequest) {
         return groupService.removeMember(principal, removeMemberRequest);
     }
