@@ -11,17 +11,17 @@ public enum GroupErrorCode implements IErrorCode {
     USER_NOT_INGROUP(HttpStatus.BAD_REQUEST, "유저가 그룹에 속해있지 않습니다.")
     ;
 
-    public final HttpStatus httpStatus;
-    public final String message;
+    public final HttpStatus status;
+    public final String description;
 
     @Override
     public HttpStatus getHttpStatus() {
-        return httpStatus;
+        return status;
     }
 
     @Override
     public String getDescription() {
-        return message;
+        return description;
     }
 
     @Override

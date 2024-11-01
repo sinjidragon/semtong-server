@@ -9,8 +9,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class ErrorResponse {
 
-    private String message;
+    private final String errorCode;
 
-    public String error;
+    public final String message;
 
 }

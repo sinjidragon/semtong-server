@@ -14,21 +14,21 @@ public enum AuthErrorCode implements IErrorCode {
     CODE_NOT_MATCH(HttpStatus.BAD_REQUEST, "인증 코드가 일치하지 않습니다."),
     ;
 
-    public final HttpStatus httpStatus;
-    public final String message;
+    public final HttpStatus status;
+    public final String description;
 
     @Override
     public HttpStatus getHttpStatus() {
-        return null;
+        return status;
     }
 
     @Override
     public String getDescription() {
-        return "";
+        return description;
     }
 
     @Override
     public String getName() {
-        return "";
+        return name();
     }
 }

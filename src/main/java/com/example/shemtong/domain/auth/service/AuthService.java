@@ -14,6 +14,7 @@ import com.example.shemtong.domain.user.repository.UserRepository;
 import com.example.shemtong.global.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
+    private final StringRedisTemplate redisTemplate;
 
     public void verifyUser(UserEntity user) {
         if (user == null)
@@ -94,11 +96,17 @@ public class AuthService {
         if (jwtUtil.isTokenValid(token)) {
             String accessToken = jwtUtil.generateToken(id.toString());
             String refreshToken = jwtUtil.generateRefreshToken(id.toString());
+            redisTemplate.opsForHash().put("verificationCodes", id, refreshToken);
+
+
+
 
             return ResponseEntity.ok(new RefreshResponse(userRole,accessToken, refreshToken, "bearer"));
         }else{
             throw new CustomException(AuthErrorCode.TOKEN_NOT_FOUND);
         }
+
+
     }
 
 }

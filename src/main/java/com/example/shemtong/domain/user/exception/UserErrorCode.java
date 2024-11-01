@@ -11,17 +11,17 @@ public enum UserErrorCode implements IErrorCode {
     USER_UNAUTHORIZED(HttpStatus.BAD_REQUEST, "권한이 없습니다.")
     ;
 
-    public final HttpStatus httpStatus;
-    public final String message;
+    public final HttpStatus status;
+    public final String description;
 
     @Override
     public HttpStatus getHttpStatus() {
-        return httpStatus;
+        return status;
     }
 
     @Override
     public String getDescription() {
-        return message;
+        return description;
     }
 
     @Override
