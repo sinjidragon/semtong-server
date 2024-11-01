@@ -1,6 +1,8 @@
 package com.example.shemtong.domain.user.service;
 
+import com.example.shemtong.domain.group.service.GroupService;
 import com.example.shemtong.domain.user.Entity.UserEntity;
+import com.example.shemtong.domain.user.Entity.UserRole;
 import com.example.shemtong.domain.user.Entity.UserState;
 import com.example.shemtong.domain.user.dto.UserResponse;
 import com.example.shemtong.domain.user.exception.UserErrorCode;
@@ -19,6 +21,7 @@ import java.time.LocalDateTime;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final GroupService groupService;
 
     public void verifyUser(UserEntity user) {
         if (user == null)
@@ -38,6 +41,9 @@ public class UserService {
     public ResponseEntity<SuccessResponse> deleteUser(Principal principal) {
         UserEntity user = userRepository.findByUid(Long.valueOf(principal.getName())).orElseThrow(null);
         verifyUser(user);
+
+        if (user.getRole() == UserRole.AGENT)
+            groupService.deleteGroup(principal);
 
         user.setRole(null);
         user.setGroup(null);
