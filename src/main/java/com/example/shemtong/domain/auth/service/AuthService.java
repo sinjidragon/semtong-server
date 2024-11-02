@@ -15,9 +15,12 @@ import com.example.shemtong.global.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.TimeUnit;
 
 import static com.example.shemtong.domain.user.Entity.UserState.CREATED;
 
@@ -79,6 +82,12 @@ public class AuthService {
         String token = jwtUtil.generateToken(user.getUid().toString());
         String refreshToken = jwtUtil.generateRefreshToken(user.getUid().toString());
 
+        ValueOperations<String, String> ops = redisTemplate.opsForValue();
+        if (ops.get(user.getUid().toString()) != null)
+            redisTemplate.delete(user.getUid().toString());
+
+        ops.set(user.getUid().toString(), refreshToken, 10080, TimeUnit.MINUTES);
+
         String userRole = user.getRole() != null ? user.getRole().name() : null;
 
         return ResponseEntity.ok(new LoginResponse(userRole, token, refreshToken, "bearer"));
@@ -93,13 +102,14 @@ public class AuthService {
 
         String userRole = user.getRole() != null ? user.getRole().name() : null;
 
-        if (jwtUtil.isTokenValid(token)) {
+        ValueOperations<String, String> ops = redisTemplate.opsForValue();
+
+        if (jwtUtil.isTokenValid(token) && ops.get(id.toString()) != token) {
             String accessToken = jwtUtil.generateToken(id.toString());
             String refreshToken = jwtUtil.generateRefreshToken(id.toString());
-            redisTemplate.opsForHash().put("verificationCodes", id, refreshToken);
 
-
-
+            redisTemplate.delete(id.toString());
+            ops.set(id.toString(), refreshToken, 10080, TimeUnit.MINUTES);
 
             return ResponseEntity.ok(new RefreshResponse(userRole,accessToken, refreshToken, "bearer"));
         }else{
