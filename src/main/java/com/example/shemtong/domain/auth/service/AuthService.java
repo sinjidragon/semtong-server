@@ -109,7 +109,7 @@ public class AuthService {
             String refreshToken = jwtUtil.generateRefreshToken(id.toString());
 
             redisTemplate.delete(id.toString());
-            ops.set(id.toString(), refreshToken, 10080, TimeUnit.MINUTES);
+            ops.set(id.toString(), refreshToken, 10080, TimeUnit.MINUTES); // 7일
 
             return ResponseEntity.ok(new RefreshResponse(userRole,accessToken, refreshToken, "bearer"));
         }else{
