@@ -1,7 +1,7 @@
 package com.example.shemtong.domain.user.repository;
 
-import com.example.shemtong.domain.user.Entity.UserEntity;
-import com.example.shemtong.domain.user.Entity.UserState;
+import com.example.shemtong.domain.user.entity.UserEntity;
+import com.example.shemtong.domain.user.entity.UserState;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;

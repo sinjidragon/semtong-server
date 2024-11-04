@@ -1,6 +1,6 @@
 package com.example.shemtong.domain.group.entity;
 
-import com.example.shemtong.domain.user.Entity.UserEntity;
+import com.example.shemtong.domain.user.entity.UserEntity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;

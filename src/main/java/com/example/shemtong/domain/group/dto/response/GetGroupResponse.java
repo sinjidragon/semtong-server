@@ -1,6 +1,6 @@
 package com.example.shemtong.domain.group.dto.response;
 
-import com.example.shemtong.domain.user.Entity.UserEntity;
+import com.example.shemtong.domain.user.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

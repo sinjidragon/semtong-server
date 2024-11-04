@@ -1,9 +1,9 @@
 package com.example.shemtong.domain.user.service;
 
 import com.example.shemtong.domain.group.service.GroupService;
-import com.example.shemtong.domain.user.Entity.UserEntity;
-import com.example.shemtong.domain.user.Entity.UserRole;
-import com.example.shemtong.domain.user.Entity.UserState;
+import com.example.shemtong.domain.user.entity.UserEntity;
+import com.example.shemtong.domain.user.entity.UserRole;
+import com.example.shemtong.domain.user.entity.UserState;
 import com.example.shemtong.domain.user.dto.UserResponse;
 import com.example.shemtong.domain.user.exception.UserErrorCode;
 import com.example.shemtong.domain.user.repository.UserRepository;

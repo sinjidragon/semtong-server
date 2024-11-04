@@ -1,7 +1,7 @@
 package com.example.shemtong.domain.user.service;
 
-import com.example.shemtong.domain.user.Entity.UserEntity;
-import com.example.shemtong.domain.user.Entity.UserState;
+import com.example.shemtong.domain.user.entity.UserEntity;
+import com.example.shemtong.domain.user.entity.UserState;
 import com.example.shemtong.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

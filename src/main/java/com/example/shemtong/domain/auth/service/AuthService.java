@@ -2,9 +2,9 @@ package com.example.shemtong.domain.auth.service;
 
 import com.example.shemtong.domain.auth.dto.refresh.RefreshResponse;
 import com.example.shemtong.domain.auth.exception.AuthErrorCode;
-import com.example.shemtong.domain.user.Entity.UserEntity;
+import com.example.shemtong.domain.user.entity.UserEntity;
 import com.example.shemtong.domain.auth.jwt.JwtUtil;
-import com.example.shemtong.domain.user.Entity.UserState;
+import com.example.shemtong.domain.user.entity.UserState;
 import com.example.shemtong.domain.user.exception.UserErrorCode;
 import com.example.shemtong.domain.auth.dto.login.LoginRequest;
 import com.example.shemtong.domain.auth.dto.login.LoginResponse;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.example.shemtong.domain.user.Entity.UserState.CREATED;
+import static com.example.shemtong.domain.user.entity.UserState.CREATED;
 
 @Slf4j
 @Service

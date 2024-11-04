@@ -1,4 +1,4 @@
-package com.example.shemtong.domain.user.Entity;
+package com.example.shemtong.domain.user.entity;
 
 import com.example.shemtong.domain.group.entity.GroupEntity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -7,7 +7,6 @@ import jakarta.validation.constraints.Email;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import java.security.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
